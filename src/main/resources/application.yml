@@ -13,11 +13,14 @@ spring:
       password: 123456
       driver-class-name: com.mysql.cj.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 # 日志配置
 logging:
   level:
-    com.fast.rolepermissioncenter: info
+    com.open.platform: info
     org.springframework: warn
 
 
@@ -41,3 +44,4 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
     call-setters-on-nulls: true
+
