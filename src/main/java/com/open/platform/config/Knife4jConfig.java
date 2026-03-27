@@ -27,10 +27,10 @@ public class Knife4jConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("你的项目名称 - API文档") // 文档标题
+                .title("稳照对外项目 - API文档") // 文档标题
                 .description("基于Knife4j的接口调试文档，支持在线调试、参数说明") // 描述
                 .version("1.0.0") // 版本
-                .contact(new Contact("开发人员", "https://xxx.com", "xxx@xxx.com")) // 联系人
+                .contact(new Contact("稳照研发团队", "https://wz.com", "group@wz.com")) // 联系人
                 .license("MIT License") // 许可证
                 .licenseUrl("https://opensource.org/licenses/MIT")
                 .build();
