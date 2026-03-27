@@ -47,4 +47,4 @@ spring:
             multi-statement-allow: true
 
 open:
-  effectiveTime: 30000000
+  effectiveTime: 3000000

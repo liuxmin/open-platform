@@ -47,7 +47,6 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
 
         if (System.currentTimeMillis() - Long.parseLong(timestamp) > openProperties.getEffectiveTime()) {
-            System.out.println("sign = " + (System.currentTimeMillis() - Long.parseLong(timestamp)));
             out(response, R.unauthorized("请求已过期"));
             return false;
         }
