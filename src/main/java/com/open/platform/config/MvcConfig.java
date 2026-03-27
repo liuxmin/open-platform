@@ -2,6 +2,7 @@ package com.open.platform.config;
 
 import com.open.platform.interceptor.AuthInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -17,10 +18,20 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor)
-                .excludePathPatterns("/doc.html/**", "/webjars/**", "/v3/api-docs/**")
-                .addPathPatterns("/**");
-
-
+                .addPathPatterns("/**")
+                .excludePathPatterns(
+                        "/doc.html",
+                        "/favicon.ico",
+                        "/webjars/**",
+                        "/swagger-resources/**",
+                        "/swagger-resources",
+                        "/configuration/ui",
+                        "/configuration/security",
+                        "/knife4j/**",
+                        "/v3/api-docs/**", // OpenAPI3
+                        "/v2/api-docs/**", // Swagger2（可选）
+                        "/swagger-ui/**"   // Swagger2（可选）
+                );
     }
 
     @Override
@@ -32,5 +43,15 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
         registry.addResourceHandler("/v3/api-docs/**")
                 .addResourceLocations("classpath:/META-INF/resources/v3/api-docs/");
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOriginPatterns("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*")
+                .allowCredentials(true)
+                .maxAge(3600);
     }
 }
