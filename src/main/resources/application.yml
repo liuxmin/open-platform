@@ -1,21 +1,14 @@
-# 应用服务 WEB 访问端口
 server:
   port: 8080
   servlet:
     context-path: /open
 
-
 spring:
-  # 数据源配置
-  datasource:
-      url: jdbc:mysql://127.0.0.1:3306/open_platform?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
-      username: root
-      password: 123456
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      type: com.alibaba.druid.pool.DruidDataSource
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  profiles:
+    active: test
 
 # 日志配置
 logging:
@@ -23,25 +16,16 @@ logging:
     com.open.platform: info
     org.springframework: warn
 
-
 # MyBatis 映射
 mybatis-plus:
-  # 指定 Mybatis 的 Mapper文件
   mapper-locations: classpath:mappers/**/*Mapper.xml
-  # 指定 Mybatis 的实体目录
   type-aliases-package: com.open.platform.domain
-  # 以下配置均有默认值,可以不设置
   global-config:
     db-config:
-      #主键类型 AUTO:"数据库ID自增" INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
       id-type: auto
-      #字段策略 IGNORED:"忽略判断"  NOT_NULL:"非 NULL 判断")  NOT_EMPTY:"非空判断"
       field-strategy: NOT_EMPTY
-      #数据库类型
       db-type: MYSQL
   configuration:
-    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
     map-underscore-to-camel-case: true
-    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
     call-setters-on-nulls: true
 
