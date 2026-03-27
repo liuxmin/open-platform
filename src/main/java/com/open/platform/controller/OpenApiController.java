@@ -24,7 +24,6 @@ public class OpenApiController {
 
     @GetMapping("/data")
     @ApiOperation("三方开放接口数据测试")
-    @NoSign
     public R<OpenApiResponse> getData(@Valid @ModelAttribute OpenApiRequest req) {
         OpenApiResponse response = new OpenApiResponse();
         response.setId(req.getId());
