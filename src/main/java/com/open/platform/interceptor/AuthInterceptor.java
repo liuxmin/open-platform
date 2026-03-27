@@ -4,7 +4,9 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.open.platform.common.NoSign;
 import com.open.platform.common.R;
+import com.open.platform.config.OpenProperties;
 import com.open.platform.domain.auth.OpenApp;
+import com.open.platform.model.response.auth.OpenApiResponse;
 import com.open.platform.service.auth.OpenAppService;
 import com.open.platform.utils.IpUtil;
 import com.open.platform.utils.SignUtil;
@@ -24,6 +26,9 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Resource
     private OpenAppService openAppService;
 
+    @Resource
+    private OpenProperties openProperties;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (!(handler instanceof HandlerMethod)) return true;
@@ -41,7 +46,8 @@ public class AuthInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        if (System.currentTimeMillis() - Long.parseLong(timestamp) > 3000000) {
+        if (System.currentTimeMillis() - Long.parseLong(timestamp) > openProperties.getEffectiveTime()) {
+            System.out.println("sign = " + (System.currentTimeMillis() - Long.parseLong(timestamp)));
             out(response, R.unauthorized("请求已过期"));
             return false;
         }

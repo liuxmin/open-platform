@@ -45,3 +45,6 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+
+open:
+  effectiveTime: 30000000

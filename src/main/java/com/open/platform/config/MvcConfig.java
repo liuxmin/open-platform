@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
+
     @Resource
     private AuthInterceptor authInterceptor;
 
