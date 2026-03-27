@@ -17,8 +17,9 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor)
-                .addPathPatterns("/open/**")
-                .excludePathPatterns("/doc.html/**", "/webjars/**", "/v3/api-docs/**");
+                .excludePathPatterns("/doc.html/**", "/webjars/**", "/v3/api-docs/**")
+                .addPathPatterns("/**");
+
 
     }
 
